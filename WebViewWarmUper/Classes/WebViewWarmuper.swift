@@ -62,6 +62,10 @@ extension WKWebView: WarmUpable {
 public typealias WKWebViewWarmUper = WarmUper<WKWebView>
 public extension WarmUper where Object == WKWebView {
     static let shared = WKWebViewWarmUper(creationClosure: {
-        WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
+        let config = WKWebViewConfiguration()
+        config.userContentController = WKUserContentController()
+        config.allowsInlineMediaPlayback = true
+        return WKWebView(frame: .zero, configuration: config)
     })
 }
+
